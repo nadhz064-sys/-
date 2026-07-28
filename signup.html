@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="form-section">
+        <h1>إنشاء حساب جديد</h1>
+        <p>قم بإنشاء حساب جديد للوصول إلى خدماتنا</p>
+
+        <form onsubmit="submitForm(event)">
+            <label for="name">الاسم الكامل</label>
+            <input type="text" id="name" placeholder="أدخل اسمك">
+
+            <label for="email">عنوان البريد الإلكتروني</label>
+            <input type="email" id="email" placeholder="البريد الإلكتروني">
+
+            <label for="password">كلمة المرور</label>
+            <input type="password" id="password" placeholder="********">
+
+            <label for="account_type">نوع الحساب</label>
+            <select id="account_type">
+                <option value="user">مستخدم</option>
+                <option value="donor">متبرع</option>
+            </select>
+
+            <div class="terms-container">
+                <input type="checkbox" id="terms">
+                <label for="terms"><a href="#">أوافق على الشروط و السياسة</a></label>
+            </div>
+
+            <button type="submit">إنشاء حساب</button>
+        </form>
+
+        <p class="or-text">أو</p>
+
+        <div class="social-login">
+            <button class="google-btn"><img src="img/google.png" alt="Google"> تسجيل الدخول مع Google</button>
+            <button class="apple-btn"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple"> تسجيل الدخول مع Apple</button>
+        </div>
+
+        <p class="register-text">لديك حساب بالفعل؟ <a href="login1.php">تسجيل الدخول</a></p>
+    </div>
+
+    <div class="image-section">
+        <img src="img/alula.png" alt="صورة انشاء الحساب">
+    </div>
+</div>
+
+<script>
+function submitForm(event) {
+    event.preventDefault(); // Prevent default form behavior
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let password = document.getElementById("password").value.trim();
+    let type = document.getElementById("account_type").value;
+    let terms = document.getElementById("terms").checked;
+
+    if (!name || !email || !password || !terms) {
+        alert("يرجى تعبئة جميع الحقول والموافقة على الشروط.");
+        return;
+    }
+
+    if (password.length < 6) {
+        alert("يجب أن تكون كلمة المرور 6 أحرف أو أكثر.");
+        return;
+    }
+
+    fetch("signup.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&account_type=${type}`
+    })
+    .then(res => res.text())
+    .then(data => {
+        alert(data);
+        if (data.includes("تم إنشاء الحساب")) {
+            window.location.href = "home.php";
+        }
+    })
+    .catch(err => {
+        alert("حدث خطأ أثناء إرسال البيانات إلى الخادم.");
+        console.error(err);
+    });
+}
+</script>
+
+</body>
+</html>

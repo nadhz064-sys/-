@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>رفع البلاغ - واحة</title>
+    <style>
+        body {
+            font-family: 'Cairo', Arial, sans-serif;
+            direction: rtl;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #59372e; /* اللون الذي طلبته */
+            padding: 10px 15px; /* تم تقليل الحجم */
+            color: #fff;
+            text-align: center;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            flex-direction: column;
+        }
+
+        /* تنسيق أيقونة المستخدم لتكون في اليسار */
+        .user-icon {
+            position: absolute;
+            left: 15px; /* تحريك الأيقونة لليسار */
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin-left: 10px;
+        }
+
+        .search-bar input {
+            width: 500px;
+            padding: 8px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            text-align: right;
+        }
+
+        .language-select {
+            background-color: #fff;
+            color: #59372e;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 15px;
+        }
+
+        .navbar-links {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .navbar-links .services {
+            margin-left: 15px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 80px auto;
+            background-color: #EFEBE9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .upload-box {
+            border: 2px dashed #59372e;
+            padding: 30px;
+            background-color: #D7CCC8;
+            margin-bottom: 20px;
+            color: #6D4C41;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: right;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #59372e;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background-color: #59372e;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #4E342E;
+        }
+
+        .icon {
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* اللون الأسود لكلمة الصفحة الرئيسية */
+        .navbar-links a.home-link {
+            color: black;
+        }
+
+        /* تصنيف روابط الشريط */
+        .navbar-links {
+            margin-top: 15px;
+            padding-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- الشريط البني أعلى الصفحة -->
+<div class="navbar">
+    <!-- أيقونة المستخدم (في الجهة اليسرى) -->
+    <span class="user-icon">👤</span>
+
+    <div class="search-container">
+        <!-- الشعار بجانب مربع البحث -->
+        <img src="img/logo.png" alt="Logo" class="logo">
+        <div class="search-bar">
+            <input type="text" placeholder="بحث...">
+        </div>
+    </div>
+    
+    <!-- وضع رابط "الصفحة الرئيسية" أسفل خانة البحث -->
+    
+<div class="nav">
+    <a href="home.php" data-lang="home">الصفحة الرئيسية |</a>
+   
+    <div class="dropdown" onclick="toggleDropdown()">
+        <span class="dropbtn" data-lang="services">الخدمات</span>
+        <div class="dropdown-content">
+            <a href="#">تبرع</a>
+            <a href="map.html">الخريطة</a>
+            <a href="Reports_donor.php">البلاغات</a>
+            <a href="Water areas.html">مناطق المياه الجافة </a>
+            <a href="Donor File.php">حسابي</a>
+            <a href="logout.php">تسجيل الخروج </a>
+        </div>
+    </div>
+
+</div>
+
+    <!-- وضع قائمة اللغة في الجهة اليمنى -->
+    <select class="language-select" id="language-select">
+        <option value="ar">عربي</option>
+        <option value="en">إنجليزي</option>
+    </select>
+</div>
+
+<!-- محتوى الصفحة -->
+<!-- ✅ Updated Form With Image Upload -->
+<div class="container">
+    <form id="report-form" action="upload_report.php" method="post" enctype="multipart/form-data">
+        <div class="upload-box">
+            <label for="photo">أرفق صورة واضحة للمشكلة إن وجدت</label>
+            <input type="file" id="photo" name="photo" accept="image/*">
+        </div>
+        
+        <div class="form-group">
+            <label for="address">موقع البلاغ</label>
+            <input type="text" id="address" name="address" placeholder="حدد الموقع" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="date">التاريخ</label>
+            <input type="date" id="date" name="date" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="time">الوقت</label>
+            <input type="time" id="time" name="time" required>
+        </div>
+
+        <button type="submit" class="btn">رفع البلاغ</button>
+    </form>
+</div>
+
+</body>
+</html>

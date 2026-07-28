@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الخريطة</title>
+  <link rel="stylesheet" href="Donor.css">
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- 🔍 البحث -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css">
+  <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+  <style>
+    #map {
+      width: 90%;
+      max-width: 1000px;
+      height: 350px;
+      margin: 100px auto 30px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <div>الخريطة</div>
+    <input type="text" placeholder="البحث...">
+  </div>
+
+  <div class="nav">
+    <a href="home.php">الصفحة الرئيسية |</a>
+  </div>
+
+  <div id="map"></div>
+
+  <<script>
+  // 🇸🇦 حدود المملكة العربية السعودية
+  const saudiBounds = L.latLngBounds(
+    [16.0, 34.0], // جنوب
+    [32.5, 55.5]  // شمال
+  );
+
+  // الخريطة مقفلة على السعودية
+  const map = L.map('map', {
+    maxBounds: saudiBounds,
+    maxBoundsViscosity: 1.0
+  }).setView([23.8859, 45.0792], 6);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  let marker;
+
+  // 🔍 البحث (مع فلترة سعودية)
+  L.Control.geocoder({
+    position: 'topright',
+    defaultMarkGeocode: false
+  })
+  .on('markgeocode', function(e) {
+    const center = e.geocode.center;
+
+    // ❌ لو خارج السعودية
+    if (!saudiBounds.contains(center)) {
+      alert('❌ البحث مسموح داخل المملكة العربية السعودية فقط');
+      return;
+    }
+
+    map.setView(center, 10);
+
+    if (marker) map.removeLayer(marker);
+
+    marker = L.marker(center).addTo(map)
+      .bindPopup(`📍 ${e.geocode.name}`)
+      .openPopup();
+  })
+  .addTo(map);
+
+  // 📍 حفظ الإحداثيات عند الضغط
+  map.on('click', function(e) {
+    if (!saudiBounds.contains(e.latlng)) return;
+
+    const lat = e.latlng.lat.toFixed(6);
+    const lng = e.latlng.lng.toFixed(6);
+
+    if (marker) map.removeLayer(marker);
+
+    marker = L.marker(e.latlng).addTo(map)
+      .bindPopup(`📍 تم حفظ الموقع<br>Latitude: ${lat}<br>Longitude: ${lng}`)
+      .openPopup();
+
+    fetch("save_location.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ latitude: lat, longitude: lng })
+    });
+  });
+</script>
+
+</body>
+</html>

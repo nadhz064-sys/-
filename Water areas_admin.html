@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المناطق الجافة</title>
+  <link rel="stylesheet" href="Donor.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <style>
+    #map {
+      width: 90%;
+      max-width: 1000px;
+      height: 350px;
+      margin: 120px auto 30px;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dry-marker-label {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .btn-show-dry {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      background-color: #8B0000;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-show-dry:hover {
+      background-color: #a30000;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: #fff;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 9999;
+    }
+
+    .dropdown.open .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <div>المناطق الجافة</div>
+    <input type="text" placeholder="البحث...">
+    <div class="language-switch">
+      <select onchange="changeLanguage(this.value)">
+        <option value="ar" selected>عربي</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="nav">
+    <a href="home.php" data-lang="home">الصفحة الرئيسية |</a>
+    <div class="dropdown" onclick="toggleDropdown()">
+      <span class="dropbtn" data-lang="services">الخدمات</span>
+      <div class="dropdown-content">
+        <a href="Reports.php">البلاغات</a>
+        <a href="Donation_admin.php">التبرعات</a>
+        <a href="map_admin.html">الخريطة</a>
+        <a href="Water areas_admin.html">مناطق المياه</a>
+        <a href="logout.php">تسجيل الخروج </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- زر عرض المناطق الجافة -->
+  <button class="btn-show-dry" onclick="showDryAreas()">عرض المناطق الجافة</button>
+
+  <!-- الخريطة التفاعلية -->
+  <div id="map"></div>
+
+  <script>
+    function changeLanguage(language) {
+      if (language === 'ar') {
+        document.querySelector('.navbar div').innerText = 'المناطق الجافة';
+        document.querySelector('.nav a').innerText = 'الصفحة الرئيسية | ';
+        document.querySelector('.dropdown span').innerText = 'الخدمات';
+        document.querySelector('.btn-show-dry').innerText = 'عرض المناطق الجافة';
+      } else {
+        document.querySelector('.navbar div').innerText = 'Dry Areas';
+        document.querySelector('.nav a').innerText = 'Home | ';
+        document.querySelector('.dropdown span').innerText = 'Services';
+        document.querySelector('.btn-show-dry').innerText = 'Show Dry Areas';
+      }
+    }
+
+    function toggleDropdown() {
+      const dropdown = document.querySelector(".dropdown");
+      dropdown.classList.toggle("open");
+    }
+
+    const map = L.map('map').setView([26.6200, 37.9300], 11);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const dryIcon = L.icon({
+      iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+      iconSize: [30, 30],
+      iconAnchor: [15, 30],
+      popupAnchor: [0, -30]
+    });
+
+    const dryAreas = [
+      { name: "قاع الحاج", coords: [26.6750, 38.0015] },
+      { name: "رم", coords: [26.5900, 37.9100] },
+      { name: "الرفيعة", coords: [26.6200, 37.9500] }
+    ];
+
+    let dryMarkers = [];
+    let dryShown = false;
+
+    function showDryAreas() {
+      if (!dryShown) {
+        dryAreas.forEach(area => {
+          const marker = L.marker(area.coords, { icon: dryIcon })
+            .bindPopup(`<div class="dry-marker-label">📍 ${area.name}</div>`)
+            .addTo(map);
+          dryMarkers.push(marker);
+        });
+        dryShown = true;
+      }
+    }
+  </script>
+</body>
+</html>

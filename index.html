@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشروع التخرج</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f2e9;
+        }
+        .header {
+            background-color: #5a3826;
+            padding: 5px 20px;
+            display: flex;
+            flex-direction: column;
+            color: white;
+        }
+        .header-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+            justify-content: center;
+            gap: 10px;
+        }
+        .header .logo img {
+            height: 40px;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .search {
+            background: white;
+            padding: 10px;
+            width: 50%;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: center;
+            border: 1px solid #ccc;
+        }
+        .search-container .logo {
+            margin-left: 10px;
+        }
+        .hero {
+            text-align: center;
+            color: #5a3826;
+            padding: 50px 20px;
+        }
+        .hero h2 {
+            font-size: 40px;
+            font-weight: bold;
+        }
+        .hero p {
+            font-size: 28px;
+        }
+        .hero-img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #5a3826;
+            color: white;
+            padding: 15px 30px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .footer {
+            background-color: #5a3826;
+            text-align: center;
+            color: white;
+            padding: 15px;
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-left: 20px;
+        }
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+        }
+        .top-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .user-icon {
+            width: 30px;
+            height: 30px;
+            background-color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: bold;
+        }
+        /* قائمة منسدلة للغة */
+        .language-dropdown {
+            background-color: white;
+            color: black;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo">
+                <img src="img/logo.png" alt="شعار">
+            </div>
+            <div class="search-container">
+                <input class="search" type="text" placeholder="البحث">
+            </div>
+            <div class="top-right">
+                <!-- قائمة منسدلة للغة -->
+                <select class="language-dropdown" id="languageSelect" onchange="changeLanguage()">
+                    <option value="ar">عربي</option>
+                    <option value="en">Eng</option>
+                </select>
+                <a href="login1.php"> <div class="user-icon">👤</div></a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="hero">
+        <img src="img/alula2.png" alt="صورة بيئية" class="hero-img">
+        <h2 id="hero-title">نحو بيئة أفضل</h2>
+        <p id="hero-description">﴿ وَجَعَلْنَا مِنَ الْمَاءِ كُلَّ شَيْءٍ حَيٍّ ﴾</p>
+        <div class="buttons">
+            <a href="home.php">  <button class="button" id="continue-button">المتابعة</button></a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="social-icons">
+            <img src="img/youtt.png" alt="يوتيوب">
+            <img src="img/x.png" alt="منصة X">
+            <img src="img/phone.png" alt="واتساب">
+            <img src="img/snap.png" alt="سناب شات">
+        </div>
+    </div>
+
+    <script>
+        function changeLanguage() {
+            var language = document.getElementById("languageSelect").value;
+            
+            // تغيير النصوص بناءً على اللغة المختارة
+            if (language === "ar") {
+                document.getElementById("hero-title").innerText = "نحو بيئة أفضل";
+                document.getElementById("hero-description").innerText = "﴿ وَجَعَلْنَا مِنَ الْمَاء كُلَّ شَيْءٍ حَيٍّ ﴾";
+                document.getElementById("donate-button").innerText = "تبرع سريع";
+                document.getElementById("continue-button").innerText = "المتابعة";
+            } else if (language === "en") {
+                document.getElementById("hero-title").innerText = "Towards a Better Environment";
+                document.getElementById("hero-description").innerText = "﴿ AND WE MADE FROM WATER EVERY LIVING THING ﴾";
+                document.getElementById("donate-button").innerText = "Quick Donation";
+                document.getElementById("continue-button").innerText = "Continue";
+            }
+        }
+    </script>
+</body>
+</html>

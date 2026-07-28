@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تبرع الآن</title>
+    <script src="donate.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="Donor.css">
+
+    
+    <script>
+        function toggleDropdown() {
+            var dropdown = document.querySelector(".dropdown");
+            dropdown.classList.toggle("open");
+        }
+
+        function changeLanguage(lang) {
+            const translations = {
+                ar: {
+                    donate: "تبرع الآن",
+                    home: "الصفحة الرئيسية",
+                    services: "الخدمات",
+                    donateSection: "مشروع انقطاع المياه",
+                    chooseWaterAmount: "اختر كمية الماء",
+                    donateBtn: "تبرع"
+                },
+                en: {
+                    donate: "Donate Now",
+                    home: "Home",
+                    services: "Services",
+                    donateSection: "Water Cut Project",
+                    chooseWaterAmount: "Choose Amount of Water",
+                    donateBtn: "Donate"
+                }
+            };
+
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                el.textContent = translations[lang][key] || el.textContent;
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="language-switch">
+            <select onchange="changeLanguage(this.value)">
+                <option value="ar" selected>عربي</option>
+                <option value="en">English</option>
+            </select>
+        </div>
+        <div data-lang="donate">تبرع الآن</div>
+        <input type="text" placeholder="البحث...">
+    </div>
+
+    <div class="nav">
+        <a href="home.php" data-lang="home">الصفحة الرئيسية |</a>
+       
+        <div class="dropdown" onclick="toggleDropdown()">
+            <span class="dropbtn" data-lang="services">الخدمات</span>
+            <div class="dropdown-content">
+                <a href="#">تبرع</a>
+                <a href="map.html">الخريطة</a>
+                <a href="Reports_donor.php">البلاغات</a>
+                <a href="Water areas.html">مناطق المياه الجافه</a>
+                <a href="Donor File.php">حسابي</a>
+                <a href="logout.php">تسجيل الخروج </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <h2 data-lang="donateSection">تبرع الآن ..</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="img/water.png" alt="مشروع انقطاع المياه">
+                <h3 data-lang="donateSection">مشروع انقطاع المياه</h3>
+                <select class="select-dropdown" onchange="updateDonation(this)">
+                    <option value="">اختر كمية الماء</option>
+                    <option value="10">10 لتر</option>
+                    <option value="20">20 لتر</option>
+                    <option value="30">30 لتر</option>
+                </select>
+                <input type="text" class="donation-input" placeholder="ريال 0" readonly>
+                <button class="donate-btn" onclick="submitDonation(this)">تبرع</button>
+            </div>
+            <div class="card">
+                <img src="img/water(3).png" alt="عدم وجود مصدر مياه قريب">
+                <h3>مشروع عدم وجود مصدر مياه قريب</h3>
+                <select class="select-dropdown" onchange="updateDonation(this)">
+                    <option value="">اختر كمية الماء</option>
+                    <option value="10">10 لتر</option>
+                    <option value="20">20 لتر</option>
+                    <option value="30">30 لتر</option>
+                </select>
+                <input type="text" class="donation-input" placeholder="ريال 0" readonly>
+                <button class="donate-btn" onclick="submitDonation(this)">تبرع</button>
+                </div>
+                <div class="card">
+                    <img src="img/water(2).png" alt="تنقية المياه">
+                    <h3>مشروع تنقية المياه</h3>
+                    <!-- Inside each donation card -->
+                    <select class="select-dropdown" onchange="updateDonation(this)">
+                        <option value="">اختر كمية الماء</option>
+                        <option value="10">10 لتر</option>
+                        <option value="20">20 لتر</option>
+                        <option value="30">30 لتر</option>
+                    </select>
+                    <input type="text" class="donation-input" placeholder="ريال 0" readonly>
+                <button class="donate-btn" onclick="submitDonation(this)">تبرع</button>
+                
+                </div>
+                </div>
+        <div class="contBtn">
+            <a href="Water areas.html"> <button class="dry-areas-btn">المناطق الجافة</button></a>
+        </div>
+    </div>
+
+</body>
+
+
+</html>

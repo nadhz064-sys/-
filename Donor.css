@@ -1,0 +1,452 @@
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    direction: rtl;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f0e6;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #5a3825;
+    color: white;
+    padding: 10px 20px;
+    height: 60px;
+    position: relative;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    margin: 0 15px;
+}
+
+.search-bar {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bar input {
+    width: 500px;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    text-align: right;
+}
+
+.container {
+    padding: 20px;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: nowrap; /* ❌ prevent wrapping */
+    overflow-x: auto;   /* ✅ allows horizontal scrolling on small screens */
+  }
+  
+  
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 320px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.donation-input {
+    width: 95%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #d3d3d3;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.select-dropdown {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #d3d3d3;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.donate-btn {
+    background: #f4a6a6;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.nav {
+    padding: 10px;
+    background: #ffffff;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.dropbtn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.dropbtn::after {
+    content: "▼";
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown-content {
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 9999; /* 💥 هذا السحر */
+    display: none;
+}
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    transition:  0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background: #ddd;
+}
+
+.dropdown.open .dropdown-content {
+    display: block;
+}
+
+.dropdown.open .dropbtn::after {
+    transform: rotate(180deg);
+}
+
+.lang {
+    background-color: #5a3825;
+    text-align: right;
+    padding: 0.5%;
+}
+
+.lang text {
+    padding-right: 3%;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: right;
+    display: block;
+    width: 100%;
+}
+
+.dry-areas-btn {
+    background-color: #5a3825;
+    color: white;
+    padding: 12px 24px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 20px;
+    display: block;
+    width: fit-content;
+    margin-right: 0;
+    /* Align to the right */
+    margin-left: auto;
+    /* Push the button to the right */
+    font-weight: bold;
+}
+
+.dry-areas-btn:hover {
+    background-color: #4a2f20;
+}
+
+.contBtn {
+    padding-right: 10%;
+}
+
+.navbar {
+    background-color: #5d3a2d;
+    padding: 15px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+.navbar.language-switch {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+}
+
+.navbar select {
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.navbar input {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    padding: 10px;
+    width: 50%;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+}
+
+.map-container {
+    background-color: #D8C4A6;
+    width: 90%;
+    max-width: 900px;
+    height: 500px;
+    margin: 50px auto; /* توسيط الحاوية */
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+.map-container img {
+    width: auto;
+    height: 100%;
+    max-width: 100%;
+    display: block;
+}
+.dry-area {
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.3);
+    border: 2px dashed red;
+    border-radius: 10px;
+    padding: 5px;
+    font-weight: bold;
+    color: black;
+}
+.qaa-alhaj { top: 16%; left: 66%; }
+.ram { top: 62%; left: 59%; }
+.al-rafiah { top: 74%; left: 67%; }
+.navbar .language-switch {
+    display: flex;
+    align-items: center;
+    margin-left: 10px; /* لجعل اللغة في الجهة اليمنى */
+}
+
+
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.progress-container {
+    background-color: #e6d5c3;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+}
+.progress-step {
+    display: flex;
+    align-items: center;
+}
+.progress-step div {
+    width: 20px;
+    height: 20px;
+    background-color: #5d3a2d;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+.table-container {
+    background: white;
+    margin: 20px auto;
+    padding: 20px;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background: #f0e0d0;
+}
+button {
+    padding: 10px;
+    background-color: #5d3a2d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+.stat-box {
+    background: white;
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.language-switch {
+    display: flex;
+    align-items: right;
+    margin-right: 10px;
+}
+
+
+.user-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 80%;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.user-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: #5B3629;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #3e2519;
+}
+
+.email-list {
+    margin-top: 10px;
+}
+
+.email-list input {
+    display: block;
+    margin-top: 5px;
+    padding: 10px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+
+label {
+    text-align: right;
+    display: block;
+}

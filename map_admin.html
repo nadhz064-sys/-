@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>واجهة التسجيل</title>
+  <link rel="stylesheet" href="Donor.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
+  <style>
+  #map {
+  width: 90%;
+  max-width: 1000px;
+  height: 350px; /* مستطيلة - ارتفاع أقل من العرض */
+  margin: 100px auto 30px;
+  border-radius: 10px;
+  border: 2px solid #ccc;
+  position: relative;
+  z-index: 1;
+}
+
+
+    .map-controls {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    select {
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 9999;
+    }
+
+    .dropdown.open .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <div>الخريطة</div>
+    <input type="text" placeholder="البحث...">
+    <div class="language-switch">
+      <select onchange="changeLanguage(this.value)">
+        <option value="ar" selected>عربي</option>
+        <option value="en">English</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="nav">
+    <a href="home.php" data-lang="home">الصفحة الرئيسية |</a>
+    <div class="dropdown" onclick="toggleDropdown()">
+      <span class="dropbtn" data-lang="services">الخدمات</span>
+      <div class="dropdown-content">
+        <a href="Reports.php">البلاغات</a>
+        <a href="Donation_admin.php">التبرعات</a>
+        <a href="map_admin.html">الخريطة</a>
+        <a href="Water areas_admin.html"> مناطق المياه الجافة </a>
+        <a href="logout.php">تسجيل الخروج </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ✅ القائمة المنسدلة للمناطق -->
+  <div class="map-controls">
+    <select id="locations" onchange="goToLocation()">
+      <option value="">-- اختر منطقة --</option>
+      <option value="26.6142,37.9244">العلا القديمة</option>
+      <option value="26.6750,38.0015">قاعة الحاج</option>
+      <option value="26.5583,37.9436">قلعة الفقر</option>
+      <option value="26.5855,37.9266">العزيزية</option>
+    </select>
+  </div>
+
+  <!-- ✅ خريطة تفاعلية -->
+  <div id="map"></div>
+
+  <script>
+    function changeLanguage(language) {
+      if (language === 'ar') {
+        document.querySelector('.navbar div').innerText = 'الخريطة';
+        document.querySelector('.nav a').innerText = 'الصفحة الرئيسية | ';
+        document.querySelector('.dropdown span').innerText = 'الخدمات';
+      } else {
+        document.querySelector('.navbar div').innerText = 'Map';
+        document.querySelector('.nav a').innerText = 'Home | ';
+        document.querySelector('.dropdown span').innerText = 'Services';
+      }
+    }
+
+    function toggleDropdown() {
+      const dropdown = document.querySelector(".dropdown");
+      dropdown.classList.toggle("open");
+    }
+
+    // ✅ إنشاء الخريطة
+    const map = L.map('map').setView([26.6085, 37.9231], 13);
+
+    // ✅ تحميل الطبقة الأساسية
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // ✅ تفاعل النقر
+    map.on('click', function(e) {
+      const lat = e.latlng.lat.toFixed(4);
+      const lng = e.latlng.lng.toFixed(4);
+      L.marker(e.latlng).addTo(map)
+        .bindPopup(`📍 تم تحديد الموقع: ${lat}, ${lng}`)
+        .openPopup();
+    });
+
+    // ✅ تفعيل القائمة المنسدلة
+    function goToLocation() {
+      const val = document.getElementById('locations').value;
+      if (val) {
+        const coords = val.split(',').map(Number);
+        map.setView(coords, 15);
+        L.marker(coords).addTo(map)
+          .bindPopup("📍 تم تحديد المنطقة")
+          .openPopup();
+      }
+    }
+  </script>
+</body>
+</html>
